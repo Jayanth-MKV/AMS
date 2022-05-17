@@ -6,7 +6,7 @@ include '../head.php';
 <link rel="stylesheet" type="text/css" href="about.css"/>
 
 </head>
-<body>
+<body style="background-color: #000;">
 <?php include '../Home/navbar.php' ?> 
 
     <div class="jumbotron mb-0" style="background-color: #000;">
