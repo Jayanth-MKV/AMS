@@ -5,8 +5,8 @@
 } */
 
 img{
-    height: 35vh;
-    width: 35vh;
+    max-height: 300px;
+    max-width: 300px;
     margin: 10px auto;
     border: 1vh solid #000;
     border-radius: 250px;
@@ -29,8 +29,8 @@ button#sub{
 
 div.bgp{
     background: url('../img/bg-p.jpg');
-    width: 60vw;
-    height: 40vh;
+    width: 60vh;
+    height: 45vh;
     border: 2px solid #fff;
 }
 
@@ -47,8 +47,8 @@ div.bgp{
 
 
 .jumbotron{
-    border-radius: 30px;
-    background-color:rgba(0, 0, 0, 0.7) !important;
+    border-radius: 10px;
+    background-color:#000 !important;
 }
 
 /* .hb{
@@ -62,15 +62,16 @@ div #emailHelp{
 }
 
 h2 {
-    background-color:#a38e9f;
-    color: #ce2fdc;
-    font-size: 2em;
+    color:cyan;
+    background-color: rgba(0, 0, 0, 0.6);
+    /* opacity: 0.8; */
+    font-size: 1.6rem;
     margin: 10px auto;
-    width: fit-content;
-    padding: 10px;
-    border-radius: 100px;
-    font-family: monospace;
-    box-shadow: 0 5px 15px 0px rgba(12, 11, 11, 0.6);
+    width:fit-content;
+    padding: 15px;
+    border: 2px solid cyan;
+    border-radius: 200px;
+    font-family: monospace;  
     font-weight: bold;
 }
 

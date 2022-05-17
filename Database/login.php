@@ -7,14 +7,15 @@ if(isset($_POST["submit"])&&$_SERVER["REQUEST_METHOD"]=="POST"){
         $email=$_POST['email'];
         $password=$_POST['password'];
     }
-    $sql=$conn->prepare("SELECT id,name FROM users WHERE email=? AND password=? LIMIT 1");
-    $sql->bind_param('ss',$email,$password);
+    $sql=$conn->prepare("SELECT id,name,password FROM users WHERE email=? LIMIT 1");
+    $sql->bind_param('s',$email);
     $sql->execute();
-    $sql->bind_result($id,$name);
+    $sql->bind_result($id,$name,$str_pass);
     $sql->store_result();
-
-    if($sql->num_rows()==1){
-        if($res=$sql->fetch()){
+    $sql->fetch();
+    $check=password_verify($password,$str_pass);
+    if($sql->num_rows()==1 && $check){
+        if($check){
                 $_SESSION['login']=1;
                 $_SESSION['id']=$id;
                 $_SESSION['name']=$name;

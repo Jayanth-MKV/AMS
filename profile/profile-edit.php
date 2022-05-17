@@ -27,6 +27,7 @@ if(isset($_POST["update"])&&$_SERVER["REQUEST_METHOD"]=="POST"){
     $fb=isset($_POST['fb'])?$_POST['fb']:$row['fb'];
     $insta=isset($_POST['insta'])?$_POST['insta']:$row['insta'];
     $linkedin=isset($_POST['linkedin'])?$_POST['linkedin']:$row['linkedin'];
+    $twitter=isset($_POST['twitter'])?$_POST['twitter']:$row['twitter'];
     $website=isset($_POST['website'])?$_POST['website']:$row['website'];
     $image=(isset($_FILES['image']['tmp_name'])&&($_FILES['image']['tmp_name']!=NULL))?'profilepic/'.time().'_'.$_FILES['image']['name']:$row['img'];
     if (move_uploaded_file($_FILES['image']['tmp_name'], $image)){
@@ -37,26 +38,29 @@ if(isset($_POST["update"])&&$_SERVER["REQUEST_METHOD"]=="POST"){
       $css_class="alert-danger";
     }
     $id=$_SESSION['id'];
-
-    $sql=$conn->prepare("UPDATE `profile` SET `name`=?,`about`=?,`phone`=?,`type`=?,`insta`=?,`fb`=?,`linkedin`=?,`website`=?,`experience`=?,`year`=?,`work`=?,`img`=?,`place`=?,`dob`=? WHERE `profile`.`aid` = $id");
-    $sql->bind_param('sssssssssissss',$name,$about,$phone,$type,$insta,$fb,$linkedin,$website,$experience,$year,$work,$image,$place,$dob);
+    if($id){
+    $sql=$conn->prepare("UPDATE `profile` SET `name`=?,`about`=?,`phone`=?,`type`=?,`insta`=?,`fb`=?,`linkedin`=?,`twitter`=?,`website`=?,`experience`=?,`year`=?,`work`=?,`img`=?,`place`=?,`dob`=? WHERE `profile`.`aid` = $id");
+    $sql->bind_param('sssissssssissss',$name,$about,$phone,$type,$insta,$fb,$linkedin,$twitter,$website,$experience,$year,$work,$image,$place,$dob);
     $sql->execute();
     $sql->close();
-    if($sql){
-      $result= mysqli_query($conn," SELECT * FROM `profile` WHERE `profile`.`aid`=$id ")or die("Query failed.". mysqli_errno($conn));
-      while ($r = $result->fetch_assoc()){
-        echo $image;
-        echo print_r($_POST);
-        echo print_r($_FILES);
-        echo print_r($_SESSION);
-        echo $_FILES['image']['tmp_name'];
-      }
+    
+      // $result= mysqli_query($conn," SELECT * FROM `profile` WHERE `profile`.`aid`=$id ")or die("Query failed.". mysqli_errno($conn));
+      // if($result){
+      // while ($r = $result->fetch_assoc()){
+      //   // echo $image;
+      //   // echo print_r($_POST);
+      //   // echo print_r($_FILES);
+      //   // echo print_r($_SESSION);
+      //   // echo $_FILES['image']['tmp_name'];
+      // }
       // die($row['img']);
       $sql=$conn->prepare("UPDATE `users` SET `name`=?,`type`=?,`year`=? WHERE `users`.`id`=$id");
       $sql->bind_param('sii',$name,$type,$year);
       $sql->execute();
       $sql->close();
+      $_SESSION['name']=$name;
       echo '<script>window.location="profile.php"</script>'; 
+
             exit;
     }
     else{
@@ -75,6 +79,7 @@ if(isset($_POST["update"])&&$_SERVER["REQUEST_METHOD"]=="POST"){
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css"
     rel="stylesheet" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <!-- <link rel="stylesheet" href="../home.css" type="text/css"> -->
 
 <script>
   $(document).ready(function () {
@@ -109,14 +114,14 @@ if(isset($_POST["update"])&&$_SERVER["REQUEST_METHOD"]=="POST"){
 <body class="hb">
   <?php include '../Home/navbar.php' ;?>
 
-  <div class="jumbotron ml-5 mr-5 mt-5 text-center ">
+  <div class="jumbotron  text-center ">
     <h2>EDIT PROFILE</h2>
     <?php if(!empty($msg)):?>
     <div class="alert <?php echo $css_class ;?>">
       <?php echo $msg ;?>
     </div>
     <?php endif; ?>
-    <div class="row pp justify-content-center mt-5 p-5 avatar">
+    <div class="row pp justify-content-center mt-5 p-3 avatar">
       <div class="bgp">
         <form id='myfunction' method="POST" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>"
           enctype="multipart/form-data">
@@ -129,7 +134,7 @@ if(isset($_POST["update"])&&$_SERVER["REQUEST_METHOD"]=="POST"){
       </div>
     </div>
   </div>
-  <div class="jumbotron ml-5 mr-5 bg-dark">
+  <div class="jumbotron  bg-dark">
     <div class="row justify-content-center gx-5">
       <div class="col col-xl-6 col-12 pt-5  avatar">
         <div class="form-group mb-4 ">
@@ -182,7 +187,7 @@ if(isset($_POST["update"])&&$_SERVER["REQUEST_METHOD"]=="POST"){
                 </label>
               </div>
             </div>
-            <small id="emailHelp" class="form-text text-muted ml-4">Friendly Teacher or Lovely Student</small>
+            <small id="emailHelp" class="form-text text-muted ml-4">Teacher or Student</small>
           </div>
         </fieldset>
         <br>
@@ -252,6 +257,14 @@ if(isset($_POST["update"])&&$_SERVER["REQUEST_METHOD"]=="POST"){
             aria-describedby="emailHelp" placeholder="Linked_ID">
           <small id="emailHelp" class="form-text text-muted">LinkedIn &nbsp; eg:
             https://www.linkedin.com/in/profile_name</small>
+        </div>
+        <br>
+        <div class="form-group mb-4 ">
+          <label class="text-col">Twitter</label>
+          <input type="text" name="twitter" value="<?php echo $row['twitter']; ?>" class="form-control boxes"
+            aria-describedby="emailHelp" placeholder="Twitter_URL">
+          <small id="emailHelp" class="form-text text-muted">Twitter &nbsp; eg:
+            https://www.twitter.com/in/profile_name 😁</small>
         </div>
         <br>
         <div class="form-group mb-4 ">

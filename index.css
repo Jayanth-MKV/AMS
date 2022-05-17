@@ -37,6 +37,31 @@ h1 {
 
 }
 
+@media only screen and (max-width:430px) {
+    h3{
+        font-size: 2.5rem !important;
+    }
+    .text-center img{
+        width: 100px !important;
+        height:100px !important;
+        border:5px solid #000 !important;
+    }
+    #mua{
+        font-size: 1.4rem !important;
+    }
+    #abc{
+        z-index: 3 !important;
+        position: relative !important;
+        margin-top: 300px !important;
+    }
+    #bca{
+        z-index: 5 !important;
+        position: absolute !important;
+    }
+}
+
+
+
 h2 {
     color: #ce2fdc;
     font-size: 2em;
@@ -89,7 +114,7 @@ h3 {
     margin-top: 50px;
     margin-bottom: 10px;
     font-family: monospace;
-    font-size: 5em;
+    font-size: 5rem;
     color: rgb(0, 0, 0);
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: #F7F7F7;
@@ -118,6 +143,9 @@ button.eat {
     height: 100%;
 }
 
+.jumbotron{
+    padding: 2rem 0rem;
+}
 
 .text-col {
     font-size: 1em;
@@ -144,7 +172,6 @@ button.eat {
     border: 2px solid #000;
     border-radius: 10px;
 }
-
 
 
 

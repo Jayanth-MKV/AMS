@@ -16,7 +16,6 @@ class DB_connect{
         }
         else{
             session_start();
-            // echo "Connection Successful";
         }
     }
 

@@ -17,11 +17,11 @@
 </head>
 
 <body>
-  <div class="jumbotron abc">
+  <div class="jumbotron abc mb-0">
     <div class="jumbotron ml-5 mr-5 mt-2 mb-0 bg-transparent">
       <div class="row justify-content-center">
         <div class="col lg-6 text-center mt-4 pt-5 hea avatar">
-          <h3 class=" multicolortext"> Alumni Page</h3>
+          <h3 class="multicolortext"> Alumni Page</h3>
           <h2 id="mua">Meet Your Alumni</h2>
         </div>
         <div class="col lg-6 text-center ">
@@ -44,9 +44,7 @@
             <div class="form-group mb-4 ">
               <label class="text-col" for="exampleInputPassword1">Password</label>
               <input type="password" name="password" class="form-control boxes" placeholder="Password" required>
-              <small id="passwordHelpInline" class="text-muted">
-                Must be 8-20 characters long.
-              </small>
+              
             </div>
             <div class="form-check  mb-4 ">
               <input type="checkbox" id="cb" name="checkbox" class="form-check-input" onchange="dis_sub()">

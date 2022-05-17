@@ -1,6 +1,7 @@
 .hb{
-    background: url("img/bg3.jpg");
-    opacity: 0.8;
+    /* background: url("img/bg3.jpg"); */
+    background-color: #000;
+    /* opacity: 0.8; */
 }
 
 a h2{
@@ -61,7 +62,7 @@ span{
 
 .container-fluid{
     background-color: rgba(136, 162, 204, 0.2);
-    width: 75%;
+    width: 50% !important;
     /* min-width: 75%;
     max-width: 80%; */
 }
@@ -80,27 +81,70 @@ span{
 }
 
 .card{
-    padding: 1rem !important;
+    padding: 5px !important;
+    height: 300px !important;
+    background: lightcyan;
 }
 
 .ss-s{
     display: block;
 }
 
-
 @media only screen and (max-width:786px) {
     .col-xs-6{
         width:50%;
     } 
     .card{
-        height: 350px;
+        height: 300px !important;
     }
     .ss-s{
         display: block;
+        font-size: 1.5rem !important;
+
     }
+    h4{
+        font-size: 0.5rem !important;
+    }
+    .btn-outline-dark{
+        width: 100%;
+        font-size: 1rem;
+    }
+
+    
 }
 
-@media only screen and (max-width:450px) {
+h4{
+    font-size: 1.5rem !important;
+}
+
+@media only screen and (max-width:400px) {
+    .col-xs-6{
+        width:50%;
+    } 
+    .card{
+        height: 230px !important; 
+        padding: 5px !important;
+    }
+    .card-img-top{
+        width:6rem;
+        height:8rem;
+    }
+    .ss-s{
+        display: block;
+        font-size: 0.7rem !important;
+    }
+    h4{
+        font-size: 0.7rem !important;
+    }
+    .btn-outline-dark{
+        width: 100%;
+        font-size: 0.7rem;
+        
+    }
+    
+}
+
+@media (min-width:400px) and (max-width:450px) {
     .col-xs-6{
         width:50%;
     } 
@@ -109,7 +153,13 @@ span{
     }
     .ss-s{
         display: block;
+        font-size: 1.5rem;
     }
+    .btn-outline-dark{
+        width: 100%;
+        font-size: 0.7rem;
+    }
+
 }
 
 button a{
@@ -120,9 +170,9 @@ button a:hover{
     text-decoration: none;
 }
 
-@media only screen and (max-width:786px) {
+@media only screen and (max-width:600px) {
     .container-fluid{
-        width: 100%;
+        width: 80% !important;
     }
 }
 
@@ -147,14 +197,6 @@ h3{
     text-transform: uppercase;
 }
 
-@media only screen and (min-width:990px) {
-    .stt{
-        display:none;
-        font-size: 0.8rem;
-    }
-    .enn{
-        display: block !important;
-    }
-}
+
 
 

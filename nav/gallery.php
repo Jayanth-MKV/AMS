@@ -19,17 +19,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
     <script src="../assets/modernizr.custom.js"></script>
 
+
 </head>
 
 <body>
     <?php include '../Home/navbar.php' ?> 
     <div class="container">
-        <header class="clearfix">
-            <h1>Gallery</h1>
+        <header class="clearfix justify-content-between">
+            <h1 style="width:fit-content; float:left;">Gallery</h1>
+            <a href="add-image.php"><h2 style="width:fit-content; float:right; background-color:black;">ADD IMAGE</h2></a>
         </header>
         <?php if(!isset($_SESSION['name'])){ ?>
-        <div class="container justify-content-center align-items-center my-5" style=" display:flex;
-    height:500px;
+        <div class="container justify-content-center align-items-center my-5" style=" display:flex; height:500px;
     background-color:black;">
             <div class="btn btn-outline-light" style="color:aliceblue">
                 <a href="/ams/index.php">LOGIN</a>
@@ -55,16 +56,17 @@
                 <?php } ?>
             </ul>
         </div>
-    </div>
+    
     <?php }?>
+    </div>
     <!-- /container -->
-    <script src="../assets/jquery-1.11.3.min.js"></script>
+    <!-- <script src="../assets/jquery-1.11.3.min.js"></script>
     <script src="../assets/grid.js"></script>
     <script>
         $(function () {
             Grid.init();
         });
-    </script>
+    </script> -->
 
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
