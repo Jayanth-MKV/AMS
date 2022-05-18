@@ -65,7 +65,7 @@ span{
     </style>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-dark ">
-    <a class="navbar-brand" href="/ams/home.php">
+    <a class="navbar-brand" href="<?php echo $_SERVER['DOCUMENT_ROOT'].'/home.php';?>">
       <h2>NCS ALUMNI</h2>
     </a>&nbsp;
     <a class="navbar-brand stt" id="wtsapp" href="https://chat.whatsapp.com/LGdqqVW4gb24bjC29cmalr" target="_blank">
@@ -84,36 +84,36 @@ span{
         <ul class="navbar-nav">
 
           <li class="nav-item navbar-brand active mr-4">
-            <a class="nav-link" href="/ams/home.php"><span style=" color: cyan;">
+            <a class="nav-link" href="<?php echo $_SERVER['DOCUMENT_ROOT'].'/home.php';?>"><span style=" color: cyan;">
             <i class="fa-solid fa-house"></i>
               </span>
               <span>Home</span> <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item navbar-brand active mr-4">
-            <a class="nav-link" href="/ams/nav/gal.php"><span style=" color: cyan;">
+            <a class="nav-link" href="<?php echo $_SERVER['DOCUMENT_ROOT'].'/gal.php';?>"><span style=" color: cyan;">
             <i class="fa-solid fa-images"></i>
               </span><span>Gallery</span></a>
           </li>
           <li class="nav-item navbar-brand active mr-4">
-            <a class="nav-link" href="/ams/nav/about.php"><span style=" color: cyan;">
+            <a class="nav-link" href="<?php echo $_SERVER['DOCUMENT_ROOT'].'/nav/about.php';?>"><span style=" color: cyan;">
                 <i class="fa-solid fa-circle-info"></i>
               </span><span>About</span></a>
           </li>
           <?php if(isset($_SESSION['id'])&&$_SESSION['email']=="admin@ncs.com"): ?>
-          <li class="nav-item navbar-brand active mr-4"><a class="nav-link js-scroll-trigger" href="/ams/panel.php"
+          <li class="nav-item navbar-brand active mr-4"><a class="nav-link js-scroll-trigger" href="<?php echo $_SERVER['DOCUMENT_ROOT'].'/panel.php';?>"
               id="admin"><span style=" color: cyan;">
               <i class="fa-solid fa-cubes"></i>
               </span><span>panel</span></a></li>
               <?php endif; ?> 
           <?php if(!isset($_SESSION['id'])): ?>
-          <li class="nav-item navbar-brand active mr-4"><a class="nav-link js-scroll-trigger" href="/ams/index.php"
+          <li class="nav-item navbar-brand active mr-4"><a class="nav-link js-scroll-trigger" href="<?php echo $_SERVER['DOCUMENT_ROOT'].'/index.php';?>"
               id="login"><span style=" color: cyan;">
                 <i class="fa-solid fa-user fa-l"></i>
               </span><span>Login</span></a></li>
           <?php else: ?>
           <li>
             <div class="nav-item navbar-brand  active dropdown" style="margin-right: 1.5rem;">
-              <a class="nav-link dropdown-toggle " style="display:inline-block; " href="/ams/profile/profile.php" id="navbarDropdown"
+              <a class="nav-link dropdown-toggle " style="display:inline-block; " href="<?php echo $_SERVER['DOCUMENT_ROOT'].'/profile/profile.php';?>" id="navbarDropdown"
                 role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span style=" color: cyan;">
                   <i class="fa-solid fa-user fa-l"></i>
@@ -122,8 +122,8 @@ span{
 
 
               <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/ams/profile/profile.php"><span class="dp">Profile</span></a>
-                <a class="dropdown-item" href="/ams/profile/settings.php"><span class="dp">Settings</span></a>
+                <a class="dropdown-item" href="<?php echo $_SERVER['DOCUMENT_ROOT'].'/profile/profile.php';?>"><span class="dp">Profile</span></a>
+                <a class="dropdown-item" href="<?php echo $_SERVER['DOCUMENT_ROOT'].'/profile/settings.php';?>"><span class="dp">Settings</span></a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" onclick="val()"><span class="dp">Logout</span></a>
               </div>
@@ -159,7 +159,7 @@ span{
       var del = confirm("Are you sure you want to logout");
             if (del) {
                 console.log(del);
-                window.location.href = "/ams/Database/logout.php";
+                window.location.href = "<?php echo $_SERVER['DOCUMENT_ROOT'].'/Database/logout.php';?>";
             } else {
                 console.log(del);
                 alert("Action canceled");

@@ -1,6 +1,6 @@
 <?php include '../head.php';
 include '../Database/DB_functions.php' ?>
-<title>Gally</title>
+<title>Gallery</title>
 <link rel="stylesheet" type="text/css" href="gal.css">
 </head>
 
@@ -19,7 +19,7 @@ include '../Database/DB_functions.php' ?>
         <div class="container justify-content-center align-items-center my-5" style=" display:flex; height:500px;
         background-color:black;">
             <div class="btn btn-outline-light" style="color:aliceblue">
-                <a href="/ams/index.php">LOGIN</a>
+                <a href="<?php echo $_SERVER['DOCUMENT_ROOT'].'/index.php';?>">LOGIN</a>
             </div>
         </div> <?php }
         else {?>
@@ -35,7 +35,7 @@ include '../Database/DB_functions.php' ?>
                     ?>
 
                 <div class="col col-lg-3 col-md-6 col-sm-6 col-xs-12 mb-3" data-toggle="modal" data-target=".bd-example-modal-lg">
-                    <img src="/ams/uploads/<?php echo $row['path']; ?>"
+                    <img src="<?php echo $_SERVER['DOCUMENT_ROOT'].'/'.'uploads/'. $row['path']; ?>"
                         style="width: 100%;  height:200px; border:2px solid cyan;"
                         onclick="myFunction(this);" id="im" alt="<?php echo "<b>".$row['name']."</b>-:-:-<br>".$row['description'] ."<br> -- "."<em>".$row['uploadby']."</em>" ?>" />   
                 </div>

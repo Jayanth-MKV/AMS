@@ -1,38 +1,8 @@
 <?php
 
-require '../Database/DB_functions.php';
-    $message = "";
-    if (isset($_POST["submit"]))
-    {
-
-        $title = mysqli_real_escape_string($conn, $_POST["title"]);
-        $description = mysqli_real_escape_string($conn, $_POST["description"]);
-        $uploadby = mysqli_real_escape_string($conn, $_POST["uploadby"]);
-        $title = htmlentities($title);
-        $description = htmlentities($description);
-        $uploadby =htmlentities($uploadby);
-
-        $total_image = count($_FILES["image"]["tmp_name"]);
-        for ($a = 0; $a < $total_image; $a++)
-        {
-        	$tmp_name = $_FILES["image"]["tmp_name"][$a];
-	    	$file_name = $_FILES["image"]["name"][$a];
-	        $file_path = "../uploads/" . $file_name;
-
-	        $sql = "INSERT INTO gallery(name, description, path, uploadby) VALUES(?, ?, ?, ?)";
-            $s=$conn->prepare($sql);
-            $s->bind_param('ssss',$title,$description,$file_name,$uploadby);
-            $s->execute();
-	        if (move_uploaded_file($tmp_name, $file_path))  {
-                $message = "Image uploaded successfully"."Image-$a";
-            }else{
-                $message = "Failed to upload image"."Image-$a";
-          }
-	        
-        }
-        $message = "Image has been uploaded";
-    }
+include '../Database/DB_functions.php';
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -113,13 +83,52 @@ require '../Database/DB_functions.php';
                     </div>
                     <div class="form-group">
                         <label>Uploaded By</label>
-                        <input type="text" name="uploadby" value=<?php echo $_SESSION['name']; ?> class="form-control" />
+                        <input type="text" name="uploadby" value='<?php echo $_SESSION['name'];?>' class="form-control" />
                     </div>
                     <input type="submit" name="submit" value="Add" class="btn btn-success" />
                 </form>
             </div>
         </div>
     </div>
+
+
+    <?php
+    $message = "";
+    if (isset($_POST["submit"]))
+    {
+
+        $title = mysqli_real_escape_string($conn, $_POST["title"]);
+        $description = mysqli_real_escape_string($conn, $_POST["description"]);
+        $uploadby = mysqli_real_escape_string($conn, $_POST["uploadby"]);
+        $title = htmlentities($title);
+        $description = htmlentities($description);
+        $uploadby =htmlentities($uploadby);
+
+        $total_image = count($_FILES['image']['tmp_name']);
+        for ($a = 0; $a < $total_image; $a++)
+        {
+        	$tmp_name = $_FILES['image']['tmp_name'][$a];
+	    	$file_name = $_FILES['image']['name'][$a];
+            $image=(isset($tmp_name)&&($tmp_name!=NULL))?time().'_'.$file_name:"../img/default.png";
+	        // $file_path = "../uploads/".$file_name;
+
+	        $sql = "INSERT INTO `gallery`(name, description, path, uploadby) VALUES(?, ?, ?, ?)";
+            $s=$conn->prepare($sql);
+            $s->bind_param('ssss',$title,$description,$image,$uploadby);
+            $s->execute();
+	        if (move_uploaded_file($tmp_name, $_SERVER['DOCUMENT_ROOT'] .'/'.'uploads/'.$image))  {
+                $message = "Image uploaded successfully"."Image-$a";
+            }else{
+                $message = "Failed to upload image"."Image-$a";
+          }
+	        
+        }
+        
+    }
+?>
+
+
+
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">

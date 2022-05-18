@@ -6,7 +6,7 @@
           <!-- Breadcrumb -->
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="/ams/index.php">Home</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo $_SERVER['DOCUMENT_ROOT'].'/index.php';?>">Home</a></li>
               <!-- <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li> -->
               <li class="breadcrumb-item active" aria-current="page"><?php echo $row['name']?></li>
             </ol>

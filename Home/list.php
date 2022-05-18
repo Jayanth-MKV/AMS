@@ -48,7 +48,7 @@
         <div class="card shadow mb-4 align-items-center">
           <img class="card-img-top mb-3" src="<?php echo 'profile/'.$row['img'] ?>" alt="Card image cap">
           <div class="card-block text-center align-items-center">
-           <h4 class="mx-auto" style="color:black; font-size:1rem !important; max-width:60%;"><?php
+           <h4 class="mx-auto" style="color:black; font-size:1rem !important; max-width:90%;"><?php
             $nam=explode(" ",$row['name']);
             echo $nam[0];
             ?></h4>

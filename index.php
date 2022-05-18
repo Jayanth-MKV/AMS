@@ -78,7 +78,7 @@
         $_SESSION['error']=0;
       }
       else if(isset($_SESSION['login'])&&$_SESSION['login']==1){
-        header("Location: /ams/home.php");
+        header("Location: ".$_SERVER['DOCUMENT_ROOT'].'/home.php');
       }
     ?>
   </div>

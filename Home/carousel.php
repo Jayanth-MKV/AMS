@@ -1,6 +1,7 @@
 <style>
   .carousel-inner{
     height: fit-content;
+    max-height:  100vh!important;
   }
   .carousel-item.active{
     height: 35% !important;
@@ -19,16 +20,20 @@
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
       </ol>
       <div class="carousel-inner mx-auto">
         <div class="carousel-item active">
-          <img class="d-block w-100" src="img/default.png" alt="First slide">
+          <img class="d-block w-100 " src="img/default.png" alt="First slide">
         </div>
         <div class="carousel-item">
-          <img class="d-block w-100" src="img/FB_IMG_1589874268305.jpg" alt="Second slide">
+          <img class="d-block w-100" src="img/pic1.jpeg" alt="Second slide">
         </div>
         <div class="carousel-item">
-          <img class="d-block w-100" src="img/FB_IMG_1589874282456.jpg" alt="Third slide">
+          <img class="d-block w-100" src="img/pic2.JPG"alt="Third slide">
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100 " src="img/pic3.jpg"alt="Fourth slide">
         </div>
       </div>
       <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
@@ -43,8 +48,8 @@
   </div>
 
 
-  <div class="container mb-5" style="border: 2px solid cyan;">
+  <!-- <div class="container mb-5" style="border: 2px solid cyan;">
   <video width="100%" height="auto" autoplay controls>
       <source src="https://drive.google.com/file/d/1jj3xftM5eQV7cY_W94X0-yybXXwwrFFR/view" type="video/mp4" />
   </video>
-  </div>
+  </div> -->

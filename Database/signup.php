@@ -1,63 +1,5 @@
 <?php
-include "DB_functions.php";
-if(isset($_SESSION['login'])&&$_SESSION['login']==1){?>
-<script type="text/javascript">
-  window.location.href = "/ams/home.php";
-</script>
-<?php
-}
-if(isset($_POST["signup"])&&$_SERVER["REQUEST_METHOD"]=="POST"){
-
-if(isset($_POST['name'])&&isset($_POST['email'])&&isset($_POST['password'])&&isset($_POST['type'])){
-    $name=$_POST['name'];
-    $password=$_POST['password'];
-    $type=$_POST['type'];
-    $email=$_POST['email'];
-    $year=(isset($_POST['year']))?$_POST['year']:0;
-    $image=(isset($_FILES['image']['tmp_name'])&&($_FILES['image']['tmp_name']!=NULL))?'profilepic/'.time().'_'.$_FILES['image']['name']:NULL;
-        echo $image;
-        echo print_r($_POST);
-        echo print_r($_FILES);
-        echo print_r($_SESSION);
-        echo $_FILES['image']['tmp_name']; 
-$check_mail=mysqli_num_rows(mysqli_query($conn,"SELECT `id` FROM `users` WHERE `email`='$email'"));
-if($check_mail>0){
-  ?>
-<script type="text/javascript">
-  window.alert("The Email Already Exists");
-  window.location.href = "signup.php";
-</script>
-<?php
- $check_mail=0;
-}else{
-$str_pass=password_hash($password,PASSWORD_BCRYPT);
-$sql=$conn->prepare("INSERT INTO `users`(`name`, `email`, `password`, `type`) VALUES (?,?,?,?)");
-    $sql->bind_param('sssi',$name,$email,$str_pass,$type);
-    $sql->execute();
-    $sql->close();
-    if (move_uploaded_file($_FILES['image']['tmp_name'], "../profile/".$image)){
-      $msg = "Image uploaded successfully";
-    }
-    else{
-      $msg="Image Not Uploaded";
-    }
-    $id=mysqli_query($conn,"SELECT id FROM `users` WHERE `email`='$email'");
-    $row=$id->fetch_assoc();
-    $idi=$row['id'];
-    $sql=$conn->prepare("INSERT INTO `profile`(`aid`, `email`, `name`,`type`,`year`,`img`) VALUES (?,?,?,?,?,?)");
-    $sql->bind_param('issiis',$idi,$email,$name,$type,$year,$image);
-    $sql->execute();
-    $sql->close();
-    ?>
-<script>
-  window.location.href = "/ams/index.php";
-</script>
-<?php
-    exit;
-}
-}
-}
-?>
+include "DB_functions.php";?>
 
 
 <!DOCTYPE html>
@@ -130,15 +72,15 @@ $sql=$conn->prepare("INSERT INTO `users`(`name`, `email`, `password`, `type`) VA
               <legend class="col-form-label col-sm-2 pt-0 text-col">Type</legend>
               <div class="col-sm-10">
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="type" id="gridRadios1" onchange="is_stu()"
-                    value="1" checked>
+                  <input class="form-check-input" type="radio" name="type" id="gridRadios1" value="1" onchange="is_stu()"
+                     checked>
                   <label class="form-check-label text-col" for="gridRadios1">
                     Teacher
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="type" id="gridRadios2" onchange="is_stu()"
-                    value="0">
+                  <input class="form-check-input" type="radio" name="type" id="gridRadios2" value="0" onchange="is_stu()"
+                    >
                   <label class="form-check-label text-col" for="gridRadios2">
                     Student
                   </label>
@@ -153,7 +95,7 @@ $sql=$conn->prepare("INSERT INTO `users`(`name`, `email`, `password`, `type`) VA
             <input type="text" name="year" value="2001" class="form-control boxes" aria-describedby="emailHelp"
               placeholder="Email" required>
           </div>
-          <div class="form-group mb-4 ">
+          <div class="form-group mb-4">
             <label class="text-col">Profile_pic</label>
             <input type="file" name="image" required>
           </div>
@@ -179,7 +121,66 @@ $sql=$conn->prepare("INSERT INTO `users`(`name`, `email`, `password`, `type`) VA
   </div>
 
 
+  <?php
+if(isset($_SESSION['login'])&&$_SESSION['login']==1){?>
+<script type="text/javascript">
+  window.location.href = "<?php echo $_SERVER['DOCUMENT_ROOT'].'/home.php';?>";
+</script>
+<?php
+}
+if(isset($_POST["signup"])&&$_SERVER["REQUEST_METHOD"]=="POST"){
 
+if(isset($_POST['name'])&&isset($_POST['email'])&&isset($_POST['password'])&&isset($_POST['type'])){
+    $name=$_POST['name'];
+    $password=$_POST['password'];
+    $type=$_POST['type'];
+    $email=$_POST['email'];
+    $year=(isset($_POST['year']))?$_POST['year']:2001;
+    $image=(isset($_FILES['image']['tmp_name'])&&($_FILES['image']['tmp_name']!=NULL))?'profilepic/'.time().'_'.$_FILES['image']['name']:"../img/default.png";
+         
+$check_mail=mysqli_num_rows(mysqli_query($conn,"SELECT `id` FROM `users` WHERE `email`='$email'"));
+if($check_mail>0){
+  ?>
+<script type="text/javascript">
+  window.alert("The Email Already Exists");
+  window.location.href = "signup.php";
+</script>
+<?php
+ $check_mail=0;
+}else{
+$str_pass=password_hash($password,PASSWORD_BCRYPT);
+$sql=$conn->prepare("INSERT INTO `users`(`name`, `email`, `password`, `type`) VALUES (?,?,?,?)");
+    $sql->bind_param('sssi',$name,$email,$str_pass,$type);
+    $sql->execute();
+    $sql->close();
+    if (move_uploaded_file($_FILES['image']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] .'/'."profile/".$image)){
+      $msg = "Image uploaded successfully";
+    }
+    else{
+      $msg="Image Not Uploaded";
+    }
+    $sq=$conn->prepare("SELECT `id` FROM `users` WHERE `email`=? LIMIT 1");
+    $sq->bind_param('s',$email);
+    $sq->execute();
+    $sq->bind_result($idi);
+    $sq->store_result();
+    $sq->fetch();
+    
+    $s=$conn->prepare("INSERT INTO `profile`(`aid`, `email`, `name`,`type`,`year`,`img`) VALUES (?,?,?,?,?,?)") or die("s problem");
+    $s->bind_param('issiis',$idi,$email,$name,$type,$year,$image);
+    $s->execute();
+    $sq->close();
+    $s->close();
+    ?>
+<script>
+  window.location.href = "<?php echo $_SERVER['DOCUMENT_ROOT'].'/index.php';?>";
+</script>
+<?php
+    exit;
+}
+}
+}
+?>
 
 
 
